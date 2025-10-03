@@ -47,7 +47,7 @@ df_filtrado = df.copy()  # Começa com toda a base
 # Verificar colunas de filtro
 if all(col in df.columns for col in ["Gerente", "Supervisor", "Vendedor"]):
     # Opções para Gerente (todos únicos, incluindo NaN como "Não Atribuído")
-    gerentes = sorted(df["Gerente"].dropna().unique().tolist() + ["Não Atribuído"])
+    gerentes = sorted([str(x) for x in df["Gerente"].dropna().unique().tolist()] + ["Não Atribuído"])
     gerente_sel = st.sidebar.multiselect("Selecione Gerente(s)", options=gerentes, default=[])
 
     # Filtrar por Gerente
@@ -64,7 +64,7 @@ if all(col in df.columns for col in ["Gerente", "Supervisor", "Vendedor"]):
 
     # Opções para Supervisor (cascata: só dos gerentes filtrados)
     if len(df_filtrado) > 0:
-        supervisores = sorted(df_filtrado["Supervisor"].dropna().unique().tolist() + ["Não Atribuído"])
+        supervisores = sorted([str(x) for x in df_filtrado["Supervisor"].dropna().unique().tolist()] + ["Não Atribuído"])
         supervisor_sel = st.sidebar.multiselect("Selecione Supervisor(es)", options=supervisores, default=[])
 
         # Filtrar por Supervisor
@@ -81,7 +81,7 @@ if all(col in df.columns for col in ["Gerente", "Supervisor", "Vendedor"]):
 
         # Opções para Vendedor (cascata: só dos supervisores filtrados)
         if len(df_filtrado) > 0:
-            vendedores = sorted(df_filtrado["Vendedor"].dropna().unique().tolist() + ["Não Atribuído"])
+            vendedores = sorted([str(x) for x in df_filtrado["Vendedor"].dropna().unique().tolist()] + ["Não Atribuído"])
             vendedor_sel = st.sidebar.multiselect("Selecione Vendedor(es)", options=vendedores, default=[])
 
             # Filtrar por Vendedor
