@@ -91,7 +91,7 @@ st.metric("Clientes em Risco (4 semanas sem comprar)", num_risco)
 
 # Tabela de Clientes em Risco
 st.markdown("---")
-st.subheader("🔴 Clientes prestes ficar 5 semanas sem comprar (Risco de Perda)")
+st.subheader("🔴 Clientes prestes a ficar 5 semanas sem comprar (Risco de Perda)")
 if not clientes_risco.empty:
     st.dataframe(clientes_risco, use_container_width=True, hide_index=True)
     # Download CSV (inclui as novas colunas)
