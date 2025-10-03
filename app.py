@@ -80,13 +80,14 @@ with col2:
               delta=f"{clientes_ativos / total_clientes:.1%}" if total_clientes > 0 else "0%")
 
 with col3:
-    st.metric("Clientes Inativos", clientes_inativos, delta_color="inverse")
+    st.metric("Clientes Inativos", clientes_inativos,
+              delta=f"{clientes_inativos / total_clientes:.1%}" if total_clientes > 0 else "0%")
 
 with col4:
     st.metric("Compraram na Última Semana", clientes_ultima_semana)
 
-# Métrica extra para risco
-st.metric("Clientes em Risco (4 semanas sem comprar)", num_risco, delta_color="warning")
+# Métrica extra para risco (sem delta_color, pois não há delta)
+st.metric("Clientes em Risco (4 semanas sem comprar)", num_risco)
 
 # Tabela de Clientes em Risco
 st.markdown("---")
