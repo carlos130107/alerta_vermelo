@@ -60,8 +60,8 @@ clientes_ultima_semana = len(df[df["Semanas"] == 0]) if "Semanas" in df.columns 
 clientes_risco = pd.DataFrame()
 if "Semanas" in df.columns:
     clientes_risco = df[df["Semanas"] == 4].copy()
-    # Colunas para exibição (ajuste se necessário)
-    cols_risco = ["Cliente", "Razão Social", "Semanas", "Ativo"]
+    # Colunas para exibição (adicionadas: telefone, cpf, cnpj; ordem lógica)
+    cols_risco = ["Cliente", "Razão Social", "Telefone", "CPF / CNPJ", "Semanas", "Ativo"]
     clientes_risco = clientes_risco[[col for col in cols_risco if col in clientes_risco.columns]]
     clientes_risco = clientes_risco.sort_values("Semanas", ascending=False)
 num_risco = len(clientes_risco)
@@ -94,7 +94,7 @@ st.markdown("---")
 st.subheader("🔴 Clientes Prestes a 5 Semanas sem Comprar (Risco de Perda)")
 if not clientes_risco.empty:
     st.dataframe(clientes_risco, use_container_width=True, hide_index=True)
-    # Download CSV
+    # Download CSV (inclui as novas colunas)
     csv = clientes_risco.to_csv(index=False, encoding='utf-8').encode('utf-8')
     st.download_button("📥 Baixar Lista em CSV", csv, "clientes_em_risco.csv", "text/csv")
 else:
@@ -102,4 +102,4 @@ else:
 
 # Rodapé
 st.markdown("---")
-st.caption("App com Streamlit e Pandas. Verifique colunas: Cliente, Ativo, Semanas.")
+st.caption("App com Streamlit e Pandas. Verifique colunas: Cliente, Ativo, Semanas, Telefone, CPF / CNPJ.")
